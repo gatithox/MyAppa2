@@ -13,4 +13,10 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="edtx">Ingresa tu Nombre </string>
+    <string name="edta">Ingresa tu Apellido </string>
+    <string name="edtemail">Ingresa tu email </string>
+    <string name="edtcel">Ingresa tu Telefono </string>
+    <string name="edtbotton">SAVE </string>
+    <string name="edtswitch">I agree Terms and Conditions</string>
 </resources>

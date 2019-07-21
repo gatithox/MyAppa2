@@ -1,48 +1,71 @@
 package fabian.silva.myapp;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.util.Log;
-import android.view.View;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.view.Menu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.editText5)
+    EditText editText5;
+    @BindView(R.id.editText6)
+    EditText editText6;
+    @BindView(R.id.editText7)
+    EditText editText7;
+    @BindView(R.id.editText8)
+    EditText editText8;
+    @BindView(R.id.switch1)
+    Switch switch1;
+   @BindView(R.id.mains)
+    ConstraintLayout mains;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
 
         int a = 1;
-        Log.d("a:",String.valueOf(a));
+        Log.d("a:", String.valueOf(a));
         int b = 2;
-        Log.d("b:",String.valueOf(b));
+        Log.d("b:", String.valueOf(b));
 
-        int c= a+b;
-        Log.d("c:",String.valueOf(c));
+        int c = a + b;
+        Log.d("c:", String.valueOf(c));
 
 
-
-        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,8 +73,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -61,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -111,8 +134,28 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @OnClick(R.id.button2)
+    public void saveData() {
+        if (switch1.isChecked()) {
+            Toast.makeText(this, "Registrando a " + editText5.getText().toString() + "...",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(mains, "DEBE ACEPTAR TERMINOS Y CONDICIONES", Snackbar.LENGTH_LONG)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            switch1.setChecked(true);
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    @OnClick(R.id.button2)
+    public void onViewClicked() {
     }
 }
